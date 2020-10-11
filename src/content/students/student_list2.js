@@ -6,10 +6,12 @@ import axios from 'axios';
 import { render } from '@testing-library/react';
 import Navbar from '../../components/navbar';
 import SideBar from '../../components/sidebar';
+import { toast, ToastContainer } from 'react-toastify';
 
 function Student_list2() {
 
   const  [hasError, setErrors] =  useState(false)
+  const [isAdding, setIsAdding] = useState(false);
   const  [stu_data,setData ]= useState([])
   const  [stu_all_data, setAllData] = useState([])
   const  [filtered_stu_data, setFilteredData] = useState({})
@@ -19,6 +21,7 @@ function Student_list2() {
 
   const handleClose_1 = () => setShow_1(false);
   const handleClose_2 = () => setShow_2(false);
+
   const handleShow_1 = (index) => {
       setShow_1(true);
       console.log(index)
@@ -28,6 +31,50 @@ function Student_list2() {
       setFilteredData(filtered_data[0])
   };
   const handleShow_2 = () => setShow_2(true);
+
+  const [modalData, setModalData] = useState({
+    name: '',
+    regno: '',
+    indexno: '',
+    degree: '',
+    email: '',
+    contact: '',
+    gpa: '',
+
+
+});
+
+const handleChange = evt => {
+    evt.preventDefault();
+    setModalData({ ...modalData, [evt.target.name]: evt.target.value })
+
+}
+
+const handleAddStudent = evt => {
+    evt.preventDefault();
+    setIsAdding(true);
+    let studentData = { newStudent: modalData }
+     console.log(studentData);
+    // try {
+    //     axios
+    //         .post(`http://localhost:5000/student/AddStudentForm`, studentData)
+    //         .then(res => {
+    //             //console.log(res.data);
+    //             toast.success('New Student Added', { position: toast.POSITION.TOP_RIGHT });
+    //             console.log("student added");
+    //             setShow_2(false);
+    //             setIsAdding(false)
+    //         })
+
+    // } catch (error) {
+    //     toast.error('Error Occured  ', { position: toast.POSITION.TOP_RIGHT });
+    //     console.log(error);
+
+    // }
+
+
+
+}
 
 
     const columns = ["Student Name", "Registration No", "Index No", "Course" , "Email" , 
@@ -278,58 +325,58 @@ function Student_list2() {
                             </Modal.Header>
                            
                             <Modal.Body>
-                              <Form noValidate validated={validated} onSubmit={handleSubmit}>
+                              <Form onSubmit={handleAddStudent} >
 
-                                <Form.Group as={Row} controlId="name">
+                                <Form.Group as={Row} >
                                     <Form.Label column sm="3" style={{ fontSize: 17, fontWeight: 'bold', fontFamily: 'TimesNewRoman', color: '#616161' }}>
                                     Name With Initials : 
                                     </Form.Label>
                                     <Col sm="9">
-                                    <Form.Control type="text" required placeholder="Amanda R.P.T."/>
-                                    <Form.Control.Feedback type="invalid"> Please provide the student name.</Form.Control.Feedback>
+                                    <Form.Control type="text" name="name" id="name" required placeholder="Amanda R.P.T." onChange={handleChange} />
+                                    {/* <Form.Control.Feedback type="invalid"> Please provide the student name.</Form.Control.Feedback> */}
                                     </Col>
                                 </Form.Group>
                                 
-                                <Form.Group as={Row} controlId="regno">
+                                <Form.Group as={Row} >
                                     <Form.Label column sm="3" style={{ fontSize: 17, fontWeight: 'bold', fontFamily: 'TimesNewRoman', color: '#616161' }}>
                                     Registration No :
                                     </Form.Label>
                                     <Col sm="9">
-                                    <Form.Control type="text" required placeholder="2017cs001"/>
-                                    <Form.Control.Feedback type="invalid"> Please provide the Registration Number.</Form.Control.Feedback>
+                                    <Form.Control type="text" name="regno" id="regno"  required placeholder="2017cs001" onChange={handleChange} />
+                                    {/* <Form.Control.Feedback type="invalid"> Please provide the Registration Number.</Form.Control.Feedback> */}
                                     </Col>
                                 </Form.Group>
 
-                                <Form.Group as={Row} controlId="indexno">
+                                <Form.Group as={Row} >
                                     <Form.Label column sm="3" style={{ fontSize: 17, fontWeight: 'bold', fontFamily: 'TimesNewRoman', color: '#616161' }}>
                                     Index No :
                                     </Form.Label>
                                     <Col sm="9">
-                                    <Form.Control required  placeholder="17000001"/>
-                                    <Form.Control.Feedback type="invalid"> Please provide the Index Number.</Form.Control.Feedback>
+                                    <Form.Control name="indexno" id="indexno" required  placeholder="17000001" onChange={handleChange} />
+                                    {/* <Form.Control.Feedback type="invalid"> Please provide the Index Number.</Form.Control.Feedback> */}
                                     </Col>
                                 </Form.Group>
 
-                                <Form.Group as={Row} controlId="degree">
+                                <Form.Group as={Row} >
                                     <Form.Label column sm="3" style={{ fontSize: 17, fontWeight: 'bold', fontFamily: 'TimesNewRoman', color: '#616161' }}>
                                     Degree Programme:
                                     </Form.Label>
                                     <Col sm="9">
-                                    <Form.Control required as="select" placeholder="Choose...">
+                                    <Form.Control name="degree" id="degree" required as="select"  onChange={handleChange}>
                                         <option>Computer Science</option>
                                         <option>Information Systems</option>
                                     </Form.Control>
-                                    <Form.Control.Feedback type="invalid"> Please select the Degree Programme.</Form.Control.Feedback>
+                                    {/* <Form.Control.Feedback type="invalid"> Please select the Degree Programme.</Form.Control.Feedback> */}
                                     </Col>
                                 </Form.Group>
 
-                                <Form.Group as={Row} controlId="email">
+                                <Form.Group as={Row} >
                                     <Form.Label column sm="3" style={{ fontSize: 17, fontWeight: 'bold', fontFamily: 'TimesNewRoman', color: '#616161' }}>
                                     Email :
                                     </Form.Label>
                                     <Col sm="9">
-                                    <Form.Control required type="email" placeholder="abc@gmail.com"/>
-                                    <Form.Control.Feedback type="invalid"> Please provide a valid email.</Form.Control.Feedback>
+                                    <Form.Control name="email" id="email" required type="email" placeholder="abc@gmail.com" onChange={handleChange} />
+                                    {/* <Form.Control.Feedback type="invalid"> Please provide a valid email.</Form.Control.Feedback> */}
                                     </Col>
                                 </Form.Group>
 
@@ -342,27 +389,35 @@ function Student_list2() {
                                     </Col>
                                 </Form.Group> */}
 
-                                <Form.Group as={Row} controlId="contact">
+                                <Form.Group as={Row} >
                                     <Form.Label column sm="3" style={{ fontSize: 17, fontWeight: 'bold', fontFamily: 'TimesNewRoman', color: '#616161' }}>
                                     Contact No:
                                     </Form.Label>
                                     <Col sm="9">
-                                    <Form.Control required placeholder="Mobile Number"/>
-                                    <Form.Control.Feedback type="invalid"> Please provide the Contact Number.</Form.Control.Feedback>
+                                    <Form.Control name="contact" id="contact" required placeholder="Mobile Number" onChange={handleChange} />
+                                    {/* <Form.Control.Feedback type="invalid"> Please provide the Contact Number.</Form.Control.Feedback> */}
                                     </Col>
                                 </Form.Group>
-                                <Form.Group as={Row} controlId="gpa">
+                                <Form.Group as={Row} >
                                     <Form.Label column sm="3" style={{ fontSize: 17, fontWeight: 'bold', fontFamily: 'TimesNewRoman', color: '#616161' }}>
                                     Current GPA :
                                     </Form.Label>
                                     <Col sm="9">
-                                    <Form.Control required type="text" placeholder="GPA"/>
-                                    <Form.Control.Feedback type="invalid"> Please provide the Current GPA.</Form.Control.Feedback>
+                                    <Form.Control name="gpa" id="gpa" required type="text" placeholder="GPA" onChange={handleChange} />
+                                    {/* <Form.Control.Feedback type="invalid"> Please provide the Current GPA.</Form.Control.Feedback> */}
                                     </Col>
                                 </Form.Group>
 
                                 <Modal.Footer>
-                                    <Button type="submit">Add Student</Button>
+                                    <Button type="submit" onClick={handleAddStudent} disabled={
+                                    !modalData.name ||
+                                    !modalData.regno ||
+                                    !modalData.indexno ||
+                                    !modalData.degree ||
+                                    !modalData.email ||
+                                    !modalData.gpa ||
+                                    !modalData.contact} >
+                                        Add Student</Button>
                                     <Button variant="secondary" onClick={handleClose_2}>
                                         Close
                                     </Button>
