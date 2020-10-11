@@ -42,7 +42,8 @@ function Student_csv(){
             const data = await res.json();
             console.log(data.message)
             /** Navigate to the dashboard */
-            window.open('/dashboard')
+            window.location.replace('/student_list2')
+            //window.open('/student_list2')
         })
         .catch(err=>{
             console.log(err)
