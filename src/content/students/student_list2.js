@@ -143,7 +143,7 @@ function Student_list2() {
 
                 <div>
                     
-                    <Modal show={show_1} onHide={handleClose_1} >
+                    <Modal show={show_1} onHide={handleClose_1} size="lg">
                         <Modal.Header closeButton style={{}} >
                         <Modal.Title style={{ marginLeft: '28%', fontSize: 24, fontWeight: 'bold', fontFamily: 'TimesNewRoman', color: '#6e6b6b' }}>Student Details</Modal.Title>
                         </Modal.Header>
@@ -189,7 +189,7 @@ function Student_list2() {
                         <Form onSubmit={handleSubmit}>
                             <Form.Group as={Row} controlId="name">
                                 <Form.Label column sm="3" style={{ fontSize: 17, fontWeight: 'bold', fontFamily: 'TimesNewRoman', color:'#616161' }}>
-                                Name : 
+                                Student Name : 
                                 </Form.Label>
                                 <Col sm="9">
                                 <Form.Control  defaultValue={filtered_stu_data.name}/>
@@ -197,7 +197,7 @@ function Student_list2() {
                             </Form.Group>
                             <Form.Group as={Row} controlId="reg_no">
                                 <Form.Label column sm="3" style={{ fontSize: 17, fontWeight: 'bold', fontFamily: 'TimesNewRoman', color: '#616161' }}>
-                                Reg No :
+                                Registration No :
                                 </Form.Label>
                                 <Col sm="9">
                                 <Form.Control  defaultValue={filtered_stu_data.reg_no}/>
@@ -213,7 +213,7 @@ function Student_list2() {
                             </Form.Group>
                             <Form.Group as={Row} controlId="course">
                                 <Form.Label column sm="3" style={{ fontSize: 17, fontWeight: 'bold', fontFamily: 'TimesNewRoman', color: '#616161' }}>
-                                Degree :
+                                Degree Programme :
                                 </Form.Label>
                                 <Col sm="9">
                                 <Form.Control defaultValue={filtered_stu_data.course===1?"Computer Science":"Information Systems"}/>
@@ -243,15 +243,15 @@ function Student_list2() {
                                 <Form.Control defaultValue={filtered_stu_data.contact}/>
                                 </Col>
                             </Form.Group>
-                            {/* <Form.Group as={Row} controlId="cv">
+                            <Form.Group as={Row} controlId="cv">
                                 <Form.Label column sm="3" style={{ fontSize: 17, fontWeight: 'bold', fontFamily: 'TimesNewRoman', color: '#616161' }}>
-                                Student CV:
+                                Current GPA:
                                 </Form.Label>
                                 <Col sm="9">
-                                <Form.Control  defaultValue="cv link"/>
+                                <Form.Control  defaultValue={filtered_stu_data.current_gpa}/>
                                 </Col>
-                            </Form.Group> */}
-                            <Button variant="primary" onClick={handleSubmit}>Update & Save</Button>
+                            </Form.Group>
+                            <Button style={{float:"right"}} variant="primary" onClick={handleSubmit}>Update & Save</Button>
                         </Form>
                         </Modal.Body>
                         {/* <Modal.Footer>
@@ -351,6 +351,16 @@ function Student_list2() {
                                     <Form.Control.Feedback type="invalid"> Please provide the Contact Number.</Form.Control.Feedback>
                                     </Col>
                                 </Form.Group>
+                                <Form.Group as={Row} controlId="gpa">
+                                    <Form.Label column sm="3" style={{ fontSize: 17, fontWeight: 'bold', fontFamily: 'TimesNewRoman', color: '#616161' }}>
+                                    Current GPA :
+                                    </Form.Label>
+                                    <Col sm="9">
+                                    <Form.Control required type="text" placeholder="GPA"/>
+                                    <Form.Control.Feedback type="invalid"> Please provide the Current GPA.</Form.Control.Feedback>
+                                    </Col>
+                                </Form.Group>
+
                                 <Modal.Footer>
                                     <Button type="submit">Add Student</Button>
                                     <Button variant="secondary" onClick={handleClose_2}>
