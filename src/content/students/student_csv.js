@@ -167,7 +167,7 @@ function Student_csv(){
                         <div className="row">
                             <div className="col-xl-7 col-lg-6 col-md-4"></div>
                             <div className="buttons col-xl-5 col-lg-6 col-md-8">
-                            <button className="btn upload btn-primary" style={{ width: '180px', marginRight: '2em' }}>Save</button>  
+                            <button className="btn upload btn-primary" style={{ width: '180px', marginRight: '2em' }} onClick={()=> saveFile()}>Save</button>    
                             <button className="btn cancel btn-danger"  style={{ width: '180px' }}>Cancel</button>
                             </div>
                         </div>
