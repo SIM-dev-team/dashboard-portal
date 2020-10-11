@@ -13,7 +13,7 @@ import Companies from './views/companies'
 import Students from './views/students'
 import StudentCvs from './views/studentCvs'
 import Emailing from './views/emailing'
-import Notifications from './views/notifications'
+//import Notifications from './views/notifications'
 import Users from './views/users'
 import Adverts from './views/adverts'
 import Login from './views/login'
@@ -36,6 +36,9 @@ import declined from './content/advertisement/declined'
 import category from './content/advertisement/category'
 import summary from './content/advertisement/summary'
 
+import nHome from './content/notification/nHome'
+import msg from './content/notification/msg'
+
 
 // import Companies from './content/companies/companies'
 import BlackListedCompany from './content/companies/blackListedCompanies'
@@ -56,7 +59,9 @@ ReactDOM.render(
         <Route path="/cvs" component={StudentCvs} />
         <Route path="/emailing" component={Emailing} />
         <Route path="/users" component={Users} />
-        <Route path="/notifications" component={Notifications} />
+
+        <Route path="/nHome" component={nHome} />
+        <Route path="/msg" component={msg} />
 
         <Route path="/setDeadline" component={setDeadline} />
         <Route path="/adCategories" component={adCategories} />
