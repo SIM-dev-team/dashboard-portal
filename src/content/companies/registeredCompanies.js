@@ -76,6 +76,11 @@ export default class RegisteredCompany extends Component {
                 com_adrz:e.address, com_estb:e.date_of_establishment, com_intern: e.provide_internships, com_fax: e.fax_number}
         });
     }
+    isDecline = (e) => {
+        const data = { comp_id : e.comp_id , user_id: '1997'};
+        Axios.post('http://localhost:5000/company/declineCompany', data).then(response=> console.log(response)).catch(err=>{
+            console.log(err); });
+    }
 
     render() {
         const {com_names ,alphabet, search_field} = this.state
@@ -145,9 +150,8 @@ export default class RegisteredCompany extends Component {
                         <img className="company-logo" src={company_data.profile_pic_url} alt="com_logo"/>
                         <div className="card-body " style={{marginLeft:' 10em'}}>
                             <h3 className="card-title" style={{position:'relative', fontSize:'30px'}}>{company_data.comp_name}</h3>
-                            <p className="card-title" style={{position:'relative', fontSize:'15px'}}>Contact Number :&ensp;{company_data.contact_number}</p>
-                            <p className="card-title" style={{position:'relative', fontSize:'15px'}}>Contact register Name:&ensp;{ 'James Abeyweera'}</p>
-                            <p className="card-title" style={{position:'relative', fontSize:'15px'}}>E-Mail :&ensp;{company_data.email}</p>
+                            <p className="card-title" style={{position:'relative', fontSize:'15px'}}><b>Contact Number :</b>&ensp;{company_data.contact_number}</p>
+                            <p className="card-title" style={{position:'relative', fontSize:'15px'}}><b>E-Mail :</b>&ensp;{company_data.email}</p>
                             <div style={{position:'relative'}}><hr/>
                                 {/* <button type="button" className="btn text-white" style={{backgroundColor:'#2d3436'}} value={company_data} onClick={()=>this.msgClick(company_data)}>Send Message</button>&emsp;&emsp; */}
                                 <button type="button" className="btn-viewmore" style={{backgroundColor:'#2d3436'}} value={company_data} onClick={()=>this.viewClick(company_data)}>View More...</button>
@@ -161,7 +165,7 @@ export default class RegisteredCompany extends Component {
                                         <Dropdown.Toggle variant="Secondary" id="dropdown-basic">
                                         </Dropdown.Toggle>
                                         <Dropdown.Menu>
-                                        <Dropdown.Item href="#/action-1">Block Company</Dropdown.Item>
+                                        <Dropdown.Item onClick={()=> this.isDecline(company_data)} href=" #">Block Company</Dropdown.Item>
                                         </Dropdown.Menu>
                                     </Dropdown>
                                 </Modal.Header>
@@ -220,9 +224,8 @@ export default class RegisteredCompany extends Component {
                     <img className="company-logo" src={company_data.profile_pic_url} alt="com_logo"/>
                         <div className="card-body " style={{marginLeft:' 10em'}}>
                             <h3 className="card-title" style={{position:'relative', fontSize:'30px'}}>{company_data.comp_name}</h3>
-                            <p className="card-title" style={{position:'relative', fontSize:'15px'}}>Contact Number :&ensp;{company_data.contact_number}</p>
-                            <p className="card-title" style={{position:'relative', fontSize:'15px'}}>Contact register Name:&ensp;{ 'James Abeyweera'}</p>
-                            <p className="card-title" style={{position:'relative', fontSize:'15px'}}>E-Mail :&ensp;{company_data.email}</p>
+                            <p className="card-title" style={{position:'relative', fontSize:'15px'}}><b>Contact Number :</b>&ensp;{company_data.contact_number}</p>
+                            <p className="card-title" style={{position:'relative', fontSize:'15px'}}><b>E-Mail :</b>&ensp;{company_data.email}</p>
                             <div style={{position:'relative'}}><hr/>
                                 {/* <button type="button" className="btn text-white" style={{backgroundColor:'#2d3436'}} value={company_data} onClick={()=>this.isApprove(company_data)}>Approve</button>&emsp;
                                 <button type="button" className="btn text-white" style={{backgroundColor:'#2d3436'}} value={company_data} onClick={()=>this.viewClick(company_data)}>Decline</button>&emsp;&emsp; */}

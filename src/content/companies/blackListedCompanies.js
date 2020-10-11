@@ -33,7 +33,7 @@ export default class BlackListedCompany extends Component {
             .then((data) => {
                 data.sort((a, b) => a.comp_name.localeCompare(b.comp_name))
                 data.forEach( element => {
-                    if(element.is_approved === false ){
+                    if(element.is_decline === true){
                         this.state.com_names.push(element)
                     }
                 })        
@@ -147,9 +147,8 @@ export default class BlackListedCompany extends Component {
                             <img className="company-logo" src={company_data.profile_pic_url} alt="com_logo"/>
                                 <div className="card-body " style={{marginLeft:' 10em'}}>
                                     <h3 className="card-title" style={{position:'relative', fontSize:'30px'}}>{company_data.comp_name}</h3>
-                                    <p className="card-title" style={{position:'relative', fontSize:'15px'}}>Contact Number :&ensp;{company_data.contact_number}</p>
-                                    <p className="card-title" style={{position:'relative', fontSize:'15px'}}>Contact register Name:&ensp;{ 'Mr.Subash Samarasinghe'}</p>
-                                    <p className="card-title" style={{position:'relative', fontSize:'15px'}}>E-Mail :&ensp;{company_data.email}</p>
+                                    <p className="card-title" style={{position:'relative', fontSize:'15px'}}><b>Contact Number :</b>&ensp;{company_data.contact_number}</p>
+                                    <p className="card-title" style={{position:'relative', fontSize:'15px'}}><b>E-Mail :</b>&ensp;{company_data.email}</p>
                                     <div style={{position:'relative'}}><hr/>
                                         <button type="button" className="btn-appr" style={{backgroundColor:'#2d3436'}} value={company_data} onClick={()=>this.unBloclClick(company_data)}>Unblock</button>&emsp;&emsp;
                                         <button type="button" className="btn-viewmoreBlack" style={{backgroundColor:'#2d3436'}} value={company_data} onClick={()=>this.viewClick(company_data)}>View More...</button>
@@ -225,9 +224,8 @@ export default class BlackListedCompany extends Component {
                     <img className="company-logo" src={company_data.profile_pic_url} alt="com_logo"/>
                         <div className="card-body " style={{marginLeft:' 10em'}}>
                             <h3 className="card-title" style={{position:'relative', fontSize:'30px'}}>{company_data.comp_name}</h3>
-                            <p className="card-title" style={{position:'relative', fontSize:'15px'}}>Contact Number :&ensp;{company_data.contact_number}</p>
-                            <p className="card-title" style={{position:'relative', fontSize:'15px'}}>Contact register Name:&ensp;{'Mr.Subash Samarasinghe'}</p>
-                            <p className="card-title" style={{position:'relative', fontSize:'15px'}}>E-Mail :&ensp;{company_data.email}</p>
+                            <p className="card-title" style={{position:'relative', fontSize:'15px'}}><b>Contact Number :</b>&ensp;{company_data.contact_number}</p>
+                            <p className="card-title" style={{position:'relative', fontSize:'15px'}}><b>E-Mail :</b>&ensp;{company_data.email}</p>
                             <div style={{position:'relative'}}><hr/>
                                 <button type="button" className="btn-appr" style={{backgroundColor:'#2d3436'}} value={company_data} onClick={()=>this.unBloclClick(company_data)}>Unblock</button>&emsp;&emsp;
                                 <button type="button" className="btn-viewmoreBlack" style={{backgroundColor:'#2d3436'}} value={company_data} onClick={()=>this.viewClick(company_data)}>View More...</button>
