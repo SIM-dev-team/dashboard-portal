@@ -27,6 +27,7 @@ import Student_csv from './content/students/student_csv';
 import Student_enrolling from './content/students/student_enrolling'
 import Student_enrolled from './content/students/student_enrolled'
 import Student_list2 from './content/students/student_list2'
+import Confirmed_students from './content/students/confirmed_students'
 
 import adHome1 from './content/advertisement/adHome1'
 import adHome2 from './content/advertisement/adHome2'
@@ -85,6 +86,7 @@ ReactDOM.render(
         <Route path="/student_enrolling" component={Student_enrolling} />
         <Route path="/student_enrolled" component={Student_enrolled} />
         <Route path="/student_list2" component={Student_list2} />
+        <Route path="/confirmed_students" component={Confirmed_students} />
 
         <Redirect from="/" to="/dashboard" />
       </Switch>
