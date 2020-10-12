@@ -210,6 +210,7 @@ const handleAddStudent = evt => {
                     options={{options,
                         print : false,
                         download: false,
+                        selectableRows:false,
                     }} 
                     />
 
@@ -297,7 +298,7 @@ const handleAddStudent = evt => {
                   <div className="col-7"></div>
                     <div className="btn_set col-5">    
                         <button className="btn cancelbtn btn-danger clearfix float-right" style={{ width: '200px', marginRight: '2em' }}onClick={()=> cancel()}>Cancel</button>  
-                        <button className="btn enrollbtn btn-primary clearfix float-right"  style={{ width: '200px' }} onClick={handleShow_2}>Enroll</button>
+                        <button className="btn enrollbtn btn-primary clearfix float-right"  style={{ width: '200px' }} onClick={handleShow_2}>Add new Student</button>
                         
                         <Modal show={show_2} onHide={handleClose_2} size="lg">
                             

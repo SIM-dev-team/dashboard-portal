@@ -17,7 +17,7 @@ function Confirmed_students(){
     const  [filtered_stu_data, setFilteredData] = useState({})
    
        
-      const columns = ["Registration No", "Index No","Student Name",  "Confirmed Company", 
+      const columns = ["Registration No", "Index No","Student Name", "Degree Programme", "Confirmed Company", 
     //   {
     //       name: "",
     //       options: {
@@ -53,7 +53,7 @@ function Confirmed_students(){
               console.log(stu_obj_array)
               setAllData(stu_obj_array)
               for(let data of stu_obj_array){
-                  const myData = [data.reg_no,data.index_no,data.name,data.comp_name]
+                  const myData = [data.reg_no,data.index_no,data.name,data.course?"Computer Science":"Information Systems",data.comp_name]
                   studentData.push(myData)
               }
               console.log(studentData)
@@ -80,6 +80,7 @@ function Confirmed_students(){
                       options={{options,
                           print : false,
                           download: false,
+                          selectableRows:false,
                       }} 
                       />
   

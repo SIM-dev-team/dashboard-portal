@@ -51,8 +51,8 @@ function Student_enrolled(){
                     </div>
                     
                     <div className="right col-3" style={{float:"right", paddingTop:"3rem"}}>
-                        <Link style={{ color: "white",float:"left"}} to="/confirmed_students">  <button className="view_students" style={{ outline: 'none' }}>
-                            View Confirmed Students </button>
+                        <Link style={{ color: "white",float:"left"}} to="/confirmed_students">  <button className="view_students2" style={{ outline: 'none' }}>
+                            Internship Confirmed Students </button>
                         </Link>
                     </div>
                     <div className="col-3"></div>
