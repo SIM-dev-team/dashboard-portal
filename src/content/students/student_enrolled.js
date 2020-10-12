@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{ useState, useEffect } from 'react';
 import './students.css'
 import {
     Card, CardImg, CardText, CardBody,
@@ -12,6 +12,29 @@ import SideBar from '../../components/sidebar';
 
 
 function Student_enrolled(){
+    const  [stu_all_data, setAllData] = useState([])
+    const  [stu_data,setData ]= useState([])
+    
+    useEffect(()=>{
+        var studentData = new Array()
+        axios.get("http://localhost:5000/student/studentcount").then(res => {
+             console.log(res)
+             const data = res.data
+             const stu_obj_array = Object.values(data)
+             console.log(stu_obj_array)
+             setAllData(stu_obj_array)
+             for(let data of stu_obj_array){
+                const myData = [data.count]
+                console.log(myData)
+                studentData.push(myData)
+            }
+            setData(studentData)
+        })
+        .catch(err => {
+            console.error(err)
+        })
+        
+    },[])
     
     return (
         <div>
@@ -36,7 +59,7 @@ function Student_enrolled(){
                 </div>
             <div className="para">
             {/* <div className="para"> */}
-                <p>300 Out of 300 Students</p>
+                <p>{stu_data} Out of 300 Students</p>
                 <p> have been enrolled.</p>
             {/* </div> */}
             {/* <Button className="enroll" style={{padding:'15px',}}>ENROLL STUDENTS</Button> */}
