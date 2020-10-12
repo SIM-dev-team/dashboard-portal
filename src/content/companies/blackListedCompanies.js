@@ -33,7 +33,7 @@ export default class BlackListedCompany extends Component {
             .then((data) => {
                 data.sort((a, b) => a.comp_name.localeCompare(b.comp_name))
                 data.forEach( element => {
-                    if(element.is_declined === true ){
+                    if(element.is_block === true ){
                         this.state.com_names.push(element)
                     }
                 })        
@@ -69,7 +69,11 @@ export default class BlackListedCompany extends Component {
         Axios.post('http://localhost:5000/company/sendMailtoCompany', msgBody).then(response => console.log(response))
     }
     unBloclClick = (e) => {
-        console.log("do something");
+        console.log(e);
+        const data = {  comp_id : e.comp_id};
+        Axios.post('http://localhost:5000/company/unblockCompany', data).then(response=> console.log(response)).catch(err=>{
+            console.log(err) });
+            window.location.reload(false);
     }
     viewClick = (e) => {
         this.setState({ show: true,
@@ -77,7 +81,6 @@ export default class BlackListedCompany extends Component {
                 com_adrz:e.address, com_estb:e.date_of_establishment, com_intern: e.provide_internships, com_fax: e.fax_number}
         });
     }
-
     
     render() {
         const {com_names ,alphabet, search_field} = this.state

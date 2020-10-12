@@ -80,13 +80,15 @@ export default class PendingCompany extends Component {
         console.log(e);
         const data = {  comp_id : e.comp_id};
         Axios.post('http://localhost:5000/company/approveCompany', data).then(response=> console.log(response)).catch(err=>{
-            console.log(err); });
+            console.log(err) });
+            window.location.reload(false);
     }
     isDecline = (e) => {
         console.log(e);
         const data = { comp_id : e.comp_id}; 
         Axios.post('http://localhost:5000/company/declineCompany', data).then(response=> console.log(response)).catch(err=>{
             console.log(err); });
+            window.location.reload(false);
     }
 
     render() {
