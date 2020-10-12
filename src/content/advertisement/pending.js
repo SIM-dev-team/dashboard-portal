@@ -234,19 +234,19 @@ function Pending() {
         <div class="container p-3 my-3 bg-light" >
           <div class="form-group row">
 
-          
-              <div class="col-md-3">
-                <Link style={{ color: 'white' }} to="/summary" > <button type="button" class="btn btn-info custom ">SUMMARY</button></Link>
-              </div>
-              <div class="col-md-3">
-                <Link style={{ color: 'white' }} to="/pending" ><button type="button" class="btn btn-info custom">PENDING APPROVAL</button></Link>
-              </div>
-              <div class="col-md-3">
-                <Link style={{ color: 'white' }} to="/approved" > <button type="button" class="btn btn-info custom" >APPROVED</button></Link>
-              </div>
-              <div class="col-md-3">
-                <Link style={{ color: 'white' }} to="/declined" ><button type="button" class="btn btn-info custom">DECLINED</button></Link>
-              </div>
+
+            <div class="col-md-3">
+              <Link style={{ color: 'white' }} to="/summary" > <button type="button" class="btn btn-info custom ">SUMMARY</button></Link>
+            </div>
+            <div class="col-md-3">
+              <Link style={{ color: 'white' }} to="/pending" ><button type="button" class="btn btn-info custom">PENDING APPROVAL</button></Link>
+            </div>
+            <div class="col-md-3">
+              <Link style={{ color: 'white' }} to="/approved" > <button type="button" class="btn btn-info custom" >APPROVED</button></Link>
+            </div>
+            <div class="col-md-3">
+              <Link style={{ color: 'white' }} to="/declined" ><button type="button" class="btn btn-info custom">DECLINED</button></Link>
+            </div>
           </div>
         </div>
 

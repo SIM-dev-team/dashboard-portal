@@ -56,7 +56,7 @@ function Login() {
                 }
                 else {
                     auth.setAuthenticatedTrue(res.data);
-                    console.log("res data :" +res.data);
+                    console.log("res data :" + res.data);
                     history.push('/');
                 }
 
@@ -103,9 +103,9 @@ function Login() {
                             <Form.Group>
                                 <small className="text-danger">{error}</small>
                             </Form.Group>
-                            <Form.Group style={{ float: 'right' }}>
+                            {/* <Form.Group style={{ float: 'right' }}>
                                 <Link to="/forgotPassword">forgot password</Link>
-                            </Form.Group>
+                            </Form.Group> */}
                             <Button
                                 variant="primary"
                                 type="submit"

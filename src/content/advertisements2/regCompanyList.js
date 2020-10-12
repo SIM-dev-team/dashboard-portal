@@ -6,16 +6,26 @@ import './ads2.css'
 import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import { Button, Modal, Form } from 'react-bootstrap'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
 function RegCompanyList() {
 
+
+  let selecteDeadline = localStorage.getItem('Deadline');
+  console.log(selecteDeadline)
+
+  //let history = useHistory();
+
+
   const [show, setShow] = useState(false);
   const [loading, setLoading] = useState(false);
   const [regCompanyData, setRegCompanyData] = useState([])
   const [modalData, setModalData] = useState([]);
+  const [success, setSucces] = useState(false);
   const handleClose = () => setShow(false);
 
   // getting data from the server to pass to the modal 
@@ -29,6 +39,19 @@ function RegCompanyList() {
     }
     setShow(true);
   }
+
+  let dateData = new Date(selecteDeadline);
+  // let datestring = dateData.toDateString();
+  // let dateNeed = new Date(datestring);
+
+  var day = dateData.getDate();
+  var month = 1 + dateData.getMonth();
+  var year = dateData.getFullYear();
+  var dateAssembled = day + "-" + month + '-' + year
+
+
+
+  console.log('deadline is ', dateAssembled);
 
 
   // for getting all registered company data 
@@ -59,7 +82,29 @@ function RegCompanyList() {
     setLoading(false)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loading])
-  console.log(regCompanyData);
+  //console.log(regCompanyData);
+
+  const handleRequestAds = () => {
+    try {
+      axios
+        .post(`http://localhost:5000/advert/requestAdverts`, { date: dateAssembled })
+        .then(res => {
+          console.log('data set to', res.data);
+          if (res.data === `error`) {
+            setSucces(false);
+            toast.error('error occured while requesting ', { position: toast.POSITION.TOP_RIGHT });
+          } else {
+            toast.success('Request Adverts Successfully ', { position: toast.POSITION.TOP_RIGHT });
+            setSucces(true);
+          }
+        })
+
+    } catch (error) {
+      console.log(error);
+
+
+    }
+  }
 
 
 
@@ -100,6 +145,10 @@ function RegCompanyList() {
 
   return (
     <div>
+      <div>
+        <ToastContainer newestOnTop={true} />
+      </div>
+
       <Navbar />
       <SideBar />
       <div
@@ -120,6 +169,7 @@ function RegCompanyList() {
           })}
           options={{
             options,
+            selectableRows: "none",
             viewColumns: false,
             download: false,
             print: false,
@@ -132,11 +182,9 @@ function RegCompanyList() {
         <div>
           {/* model to show company details */}
           {/* <Modal show={show} onHide={handleClose} >
-
             <Modal.Body>
               <Form>
                 <Form.Group>
-
                   <Form.Label style={{ fontSize: 17 }}>Company Name</Form.Label>
                   <Form.Control type="text" placeholder={modalData.comp_name} disabled style={{ fontSize: 18 }} >
                   </Form.Control>
@@ -265,20 +313,42 @@ function RegCompanyList() {
 
         </div>
         <div className="p-2 " style={{ marginLeft: '48em' }}>
-          <Link to="/summary">
-            <button
-              className="btn btn-success"
-              style={{ width: '200px', marginRight: '2em' }}
+          <div className='row'>
+            {!success ? <div>
+              <Link to="/summary" >
+                <button
+                  className="btn btn-success"
+                  style={{ width: '200px', marginRight: '2em' }}
+                  onClick={handleRequestAds}
+                  disabled={!dateData}
 
-            >
-              Request ADs
+                >
+                  Request ADs
           </button>
-          </Link>
-          <Link style={{ color: 'red' }} to="/adHome1">
-            <button className="btn btn-danger" style={{ width: '200px' }}>
-              Cancel
+              </Link>
+            </div>
+              : <div>
+                <Link to="/regCompanyList" >
+                  <button
+                    className="btn btn-success"
+                    style={{ width: '200px', marginRight: '2em' }}
+                    onClick={handleRequestAds}
+                    disabled={!dateData}
+
+                  >
+                    Request ADs
           </button>
-          </Link>
+                </Link>
+
+              </div>}
+
+            <Link style={{ color: 'red' }} to="/adHome1">
+              <button className="btn btn-danger" style={{ width: '200px' }}>
+                Cancel
+          </button>
+            </Link>
+          </div>
+
         </div>
       </div>
     </div >
