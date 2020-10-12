@@ -77,9 +77,10 @@ export default class RegisteredCompany extends Component {
         });
     }
     isDecline = (e) => {
-        const data = { comp_id : e.comp_id , user_id: '1997'};
+        console.log(e);
+        const data = { comp_id : e.comp_id}; 
         Axios.post('http://localhost:5000/company/declineCompany', data).then(response=> console.log(response)).catch(err=>{
-            console.log(err); });
+            console.log(err) });
     }
 
     render() {

@@ -33,7 +33,7 @@ export default class BlackListedCompany extends Component {
             .then((data) => {
                 data.sort((a, b) => a.comp_name.localeCompare(b.comp_name))
                 data.forEach( element => {
-                    if(element.is_decline === true){
+                    if(element.is_declined === true ){
                         this.state.com_names.push(element)
                     }
                 })        
@@ -78,6 +78,7 @@ export default class BlackListedCompany extends Component {
         });
     }
 
+    
     render() {
         const {com_names ,alphabet, search_field} = this.state
         const filter_companie = com_names.filter(company => ((company.comp_name.toLowerCase().includes(search_field.toLowerCase())) ));
