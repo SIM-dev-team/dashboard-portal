@@ -166,8 +166,8 @@ form.search-bar::after {content: ""; clear: both; display: table; border: none;}
 .compnaytab {
   box-shadow:inset 0px 11px 15px 3px #23395e;
   border: none;
-  width: 18em;
-  height: 5em;
+  width: 15em;
+  height: 4em;
   font-size: 16px;
   margin: 10px 70px;
   cursor: pointer;

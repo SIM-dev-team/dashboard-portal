@@ -78,13 +78,13 @@ export default class PendingCompany extends Component {
     }
     isApprove = (e) => {
         console.log(e);
-        // var userid = localStorage.getItem('UserToken');
-        const data = {  comp_id : e.comp_id, user_id: '2000'};
+        const data = {  comp_id : e.comp_id};
         Axios.post('http://localhost:5000/company/approveCompany', data).then(response=> console.log(response)).catch(err=>{
             console.log(err); });
     }
     isDecline = (e) => {
-        const data = { comp_id : e.comp_id , user_id: '1999'};
+        console.log(e);
+        const data = { comp_id : e.comp_id}; 
         Axios.post('http://localhost:5000/company/declineCompany', data).then(response=> console.log(response)).catch(err=>{
             console.log(err); });
     }
@@ -176,7 +176,7 @@ export default class PendingCompany extends Component {
                                         <Dropdown.Toggle variant="Secondary" id="dropdown-basic">
                                         </Dropdown.Toggle>
                                         <Dropdown.Menu>
-                                        <Dropdown.Item href="#/action-1">Block Company</Dropdown.Item>
+                                        <Dropdown.Item onClick={()=> this.isDecline(company_data) } href="#/action-1">Block Company</Dropdown.Item>
                                         </Dropdown.Menu>
                                     </Dropdown>
                                 </Modal.Header>
