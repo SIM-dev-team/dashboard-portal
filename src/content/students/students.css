@@ -129,6 +129,21 @@
     /* margin-right: 0; */
     
 }
+.view_students2{
+    border-radius: 10px;
+    background-color: rgb(54, 192, 247);
+    border-radius: 20px;
+    border-style: none;
+    color: #fff;
+    width: 260px;
+    height: 40px;
+    border: none;
+    outline: none;
+    text-align: center;
+    /* margin-bottom: 1em; */
+    /* margin-right: 0; */
+    
+}
 .view_students:hover {
     background-color: rgb(33, 153, 209);
   }
