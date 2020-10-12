@@ -86,3 +86,31 @@
   width: 70%;
   max-width: none !important;
 }
+
+.modal-60w {
+  width: 30%;
+  max-width: none !important;
+  height: 240px;
+
+}
+.saveChanges-btn{
+  background-color: rgb(54, 192, 247);
+  border-radius: 20px;
+  border-style: none;
+  color: #fff;
+  height: 40px;
+  width: 200px;
+  border: none;
+  text-align: center;
+  margin-left: 45%;
+
+}
+.saveChanges-btn:hover {
+  background-color: rgb(33, 153, 209);
+}
+
+.deadline_form_label1 {
+  font-weight: 700;
+  font-size: 34px;
+  margin-left: 8%;
+}

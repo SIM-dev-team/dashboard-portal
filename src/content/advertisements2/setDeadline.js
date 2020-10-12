@@ -2,11 +2,13 @@ import React, { Component } from 'react'
 import { Card, Form } from 'react-bootstrap'
 import './ads2.css'
 import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import Navbar from '../../components/navbar'
 import SideBar from '../../components/sidebar'
 import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css";
+
+
 
 
 
@@ -20,8 +22,12 @@ class setDeadline extends Component {
       selectedDate: null,
 
     }
+
     console.log('today date=============' + this.state.todayDate);
+
+
   }
+
   handleDateChange = (date) => {
     this.setState({ selectedDate: date })
     console.log(this.state.selectedDate);
@@ -31,8 +37,13 @@ class setDeadline extends Component {
       console.log("date can't be set");
     } else {
       console.log('date is set ' + this.state.selectedDate);
+      localStorage.setItem("Deadline", this.state.selectedDate);
     }
   }
+
+
+
+
   render() {
     return (
       <div>
@@ -71,12 +82,14 @@ class setDeadline extends Component {
 
               </Form.Group>
             </Form>
-            <Link style={{ color: 'white' }} to="/regCompanyList" >
+            <Link style={{ color: 'white' }}
+              to='/regCompanyList'
+            >
               <button
-                onSubmit={this.checkDate(this.state.selectedDate)}
+                onClick={this.checkDate(this.state.selectedDate)}
                 className="continue-btn  "
                 style={{ outline: 'none' }}
-                type="submit"
+                type="button"
                 disabled={!this.state.selectedDate}
               >
                 Continue
@@ -84,6 +97,9 @@ class setDeadline extends Component {
             </Link>
 
           </Card>
+          <div>
+
+          </div>
         </div>
       </div >
 
@@ -94,3 +110,5 @@ class setDeadline extends Component {
 }
 
 export default setDeadline
+
+

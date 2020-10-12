@@ -71,12 +71,12 @@ ReactDOM.render(
         <Route path="/category" component={category} />
         <Route path="/summary" component={summary} />
 
-        <Route path="/registeredcom" component={RegisteredCompany}/>
-        <Route path="/pendingcom" component={PendingCompany}/>
-        <Route path="/blacklistedcom" component={BlackListedCompany}/>
+        <Route path="/registeredcom" component={RegisteredCompany} />
+        <Route path="/pendingcom" component={PendingCompany} />
+        <Route path="/blacklistedcom" component={BlackListedCompany} />
         {/* <Route path="/toAllComs" component={toAllCompanies}/> */}
 
-        <Route path="/student_csv" component={Student_csv}/>
+        <Route path="/student_csv" component={Student_csv} />
         <Route path="/student_enrolling" component={Student_enrolling} />
         <Route path="/student_enrolled" component={Student_enrolled} />
         <Route path="/student_list2" component={Student_list2} />
