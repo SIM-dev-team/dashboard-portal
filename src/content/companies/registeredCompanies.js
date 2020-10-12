@@ -78,7 +78,7 @@ export default class RegisteredCompany extends Component {
     }
     isDecline = (e) => {
         console.log(e);
-        const data = { comp_id : e.comp_id}; 
+        const data = { comp_id : e.comp_id, user_id: e.user_id}; 
         Axios.post('http://localhost:5000/company/declineCompany', data).then(response=> console.log(response)).catch(err=>{
             console.log(err) });
             window.location.reload(false);
