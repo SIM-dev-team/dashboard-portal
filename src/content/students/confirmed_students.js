@@ -43,17 +43,17 @@ function Confirmed_students(){
       
       useEffect(()=>{
           var studentData = new Array()
-          var table_array_data;
-          axios.get("http://localhost:5000/student/getAll").then(res => {
-              console.log(res)
+          //var table_array_data;
+          axios.get("http://localhost:5000/student/getInternshipInfo").then(res => {
+            //  console.log(res)
               const data = res.data
-              const stu_obj_array = data.data
+              const stu_obj_array = Object.values(data)
               // table_array_data = data.table_data
               //console.log(table_array_data)
               console.log(stu_obj_array)
               setAllData(stu_obj_array)
               for(let data of stu_obj_array){
-                  const myData = [data.reg_no,data.index_no,data.name,data.confirmed_comp]
+                  const myData = [data.reg_no,data.index_no,data.name,data.comp_name]
                   studentData.push(myData)
               }
               console.log(studentData)
