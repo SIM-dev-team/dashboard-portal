@@ -8,6 +8,8 @@ import Navbar from '../../components/navbar';
 import SideBar from '../../components/sidebar';
 import { toast, ToastContainer } from 'react-toastify';
 
+//update - axios.put(http://localhost:5000/student/addNewStudent/update)
+
 function Student_list2() {
 
   const  [hasError, setErrors] =  useState(false)
@@ -43,10 +45,26 @@ function Student_list2() {
 
 
 });
+    const [modalData_1, setModalData_1] = useState({
+        name: '',
+        reg_no: '',
+        index_no: '',
+        course: '',
+        email: '',
+        contact: '',
+        gpa: '',
+
+
+    });
 
 const handleChange = evt => {
     evt.preventDefault();
     setModalData({ ...modalData, [evt.target.name]: evt.target.value })
+
+}
+const handleChange_1 = evt => {
+    evt.preventDefault();
+    setModalData_1({ ...modalData_1, [evt.target.name]: evt.target.value })
 
 }
 
@@ -55,22 +73,23 @@ const handleAddStudent = evt => {
     setIsAdding(true);
     let studentData = { newStudent: modalData }
      console.log(studentData);
-    // try {
-    //     axios
-    //         .post(`http://localhost:5000/student/AddStudentForm`, studentData)
-    //         .then(res => {
-    //             //console.log(res.data);
-    //             toast.success('New Student Added', { position: toast.POSITION.TOP_RIGHT });
-    //             console.log("student added");
-    //             setShow_2(false);
-    //             setIsAdding(false)
-    //         })
+    try {
+        axios
+            .post(`http://localhost:5000/student/addNewStudent`, studentData)
+            .then(res => {
+                //console.log(res.data);
+                toast.success('New Student Added', { position: toast.POSITION.TOP_RIGHT });
+                console.log("student added");
+                setShow_2(false);
+                setIsAdding(false);
+                window.location.replace('/student_list2')
+            })
 
-    // } catch (error) {
-    //     toast.error('Error Occured  ', { position: toast.POSITION.TOP_RIGHT });
-    //     console.log(error);
+    } catch (error) {
+        toast.error('Error Occured  ', { position: toast.POSITION.TOP_RIGHT });
+        console.log(error);
 
-    // }
+    }
 
 
 
@@ -115,6 +134,9 @@ const handleAddStudent = evt => {
         } 
         alert(event.target.name.value)
         setValidated(true);
+        //setIsAdding(true);
+        let updateStudentData = { updateStudent: modalData_1 }
+        console.log(updateStudentData);
         // if(validated) {
         //     const options = {
         //         method: 'PUT',
@@ -170,6 +192,9 @@ const handleAddStudent = evt => {
     // .catch(err=>{
     //     console.log(err)
     // })
+    function cancel(){
+        window.location.replace('/student_list2')
+    }
 
     return(
         <div>
@@ -195,51 +220,14 @@ const handleAddStudent = evt => {
                         <Modal.Title style={{ marginLeft: '28%', fontSize: 24, fontWeight: 'bold', fontFamily: 'TimesNewRoman', color: '#6e6b6b' }}>Student Details</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
-                        {/* <Form>
-                            <Form.Group>
-                            <div style={{ display: 'flex', alignItems: 'center' }}>
-                                <Form.Label style={{ fontSize: 18, fontWeight: 'bold', fontFamily: 'TimesNewRoman', color: 'grey' }}>Student Name:</Form.Label>
-                                <Form.Text style={{ fontSize: 14, fontWeight: 'bold', margin: '0px' }}>vvhjjkh</Form.Text>
-                            </div>
-
-                            <div style={{ display: 'flex', alignItems: 'center' }}>
-                                <Form.Label style={{ fontSize: 18, fontWeight: 'bold', fontFamily: 'TimesNewRoman', color: 'grey' }}>Registration No:</Form.Label>
-                                <Form.Text style={{ fontSize: 14, fontWeight: 'bold'}}>4546</Form.Text>
-                            </div>
-                            <div row style={{ display: 'flex', alignItems: 'center' }}>
-                                <Form.Label style={{ fontSize: 18, fontWeight: 'bold', fontFamily: 'TimesNewRoman', color: 'grey' }}>Index No:</Form.Label>
-                                <Form.Text style={{ fontSize: 14, fontWeight: 'bold'}}>hjgjh</Form.Text>
-                            </div>
-                            <Form.Label style={{ fontSize: 18, fontWeight: 'bold', fontFamily: 'TimesNewRoman' }}>Course:</Form.Label>
-                            <Form.Text style={{ fontSize: 14, fontWeight: 'bold'}}>vbjh</Form.Text>
-
-                            <Form.Label style={{ fontSize: 18, fontWeight: 'bold', fontFamily: 'TimesNewRoman', color: 'grey' }}>Email:</Form.Label>
-                            <Form.Text style={{ fontSize: 14, fontWeight: 'bold'}}>njnjk</Form.Text>
-
-                            <Form.Label style={{ fontSize: 18, fontWeight: 'bold', fontFamily: 'TimesNewRoman', color: 'grey' }}>Contact No:</Form.Label>
-                            <Form.Text style={{ fontSize: 14, fontWeight: 'bold'}}>bhjh</Form.Text>
-
-                            <Form.Label style={{ fontSize: 18, fontWeight: 'bold', fontFamily: 'TimesNewRoman', color: 'grey' }}>Student CV:</Form.Label>
-                            <Form.Text style={{ fontSize: 14, fontWeight: 'bold'}}>vgvh</Form.Text> */}
-
-                            {/* <Form.Label style={{ fontSize: 18, fontWeight: 'bold', fontFamily: 'TimesNewRoman', color: 'grey' }}>Fax no:</Form.Label>
-                            <Form.Text style={{ fontSize: 14, fontWeight: 'bold', marginLeft: '28%' }}></Form.Text>
-
-                            <Form.Label style={{ fontSize: 18, fontWeight: 'bold', fontFamily: 'TimesNewRoman', color: 'grey' }}>Number of employess</Form.Label>
-                            <Form.Text style={{ fontSize: 14, fontWeight: 'bold', marginLeft: '28%' }}></Form.Text>
-
-                            <Form.Label style={{ fontSize: 18, fontWeight: 'bold', fontFamily: 'TimesNewRoman', color: 'grey' }}>Number of tech leads</Form.Label>
-                            <Form.Text style={{ fontSize: 14, fontWeight: 'bold', marginLeft: '28%' }}></Form.Text> */}
-
-                            {/* </Form.Group>
-                        </Form> */}
+                        
                         <Form onSubmit={handleSubmit}>
                             <Form.Group as={Row} controlId="name">
                                 <Form.Label column sm="3" style={{ fontSize: 17, fontWeight: 'bold', fontFamily: 'TimesNewRoman', color:'#616161' }}>
                                 Student Name : 
                                 </Form.Label>
                                 <Col sm="9">
-                                <Form.Control  defaultValue={filtered_stu_data.name}/>
+                                <Form.Control  defaultValue={filtered_stu_data.name} onChange={handleChange_1} />
                                 </Col>
                             </Form.Group>
                             <Form.Group as={Row} controlId="reg_no">
@@ -247,7 +235,7 @@ const handleAddStudent = evt => {
                                 Registration No :
                                 </Form.Label>
                                 <Col sm="9">
-                                <Form.Control  defaultValue={filtered_stu_data.reg_no}/>
+                                <Form.Control  defaultValue={filtered_stu_data.reg_no} onChange={handleChange_1}/>
                                 </Col>
                             </Form.Group>
                             <Form.Group as={Row} controlId="index_no">
@@ -255,7 +243,7 @@ const handleAddStudent = evt => {
                                 Index No :
                                 </Form.Label>
                                 <Col sm="9">
-                                <Form.Control defaultValue={filtered_stu_data.index_no}/>
+                                <Form.Control defaultValue={filtered_stu_data.index_no} onChange={handleChange_1}/>
                                 </Col>
                             </Form.Group>
                             <Form.Group as={Row} controlId="course">
@@ -263,7 +251,7 @@ const handleAddStudent = evt => {
                                 Degree Programme :
                                 </Form.Label>
                                 <Col sm="9">
-                                <Form.Control defaultValue={filtered_stu_data.course===1?"Computer Science":"Information Systems"}/>
+                                <Form.Control defaultValue={filtered_stu_data.course===1?"Computer Science":"Information Systems"} onChange={handleChange_1}/>
                                 </Col>
                             </Form.Group>
                             <Form.Group as={Row} controlId="email">
@@ -271,31 +259,24 @@ const handleAddStudent = evt => {
                                 Email :
                                 </Form.Label>
                                 <Col sm="9">
-                                <Form.Control defaultValue={filtered_stu_data.email}/>
+                                <Form.Control defaultValue={filtered_stu_data.email} onChange={handleChange_1}/>
                                 </Col>
                             </Form.Group>
-                            {/* <Form.Group as={Row} controlId="ademail">
-                                <Form.Label column sm="3" style={{ fontSize: 17, fontWeight: 'bold', fontFamily: 'TimesNewRoman', color: '#616161' }}>
-                                Additional Email :
-                                </Form.Label>
-                                <Col sm="9">
-                                <Form.Control defaultValue={filtered_stu_data.add_email===undefined?"None":"malshan@gmail.com"}/>
-                                </Col>
-                            </Form.Group> */}
+                            
                             <Form.Group as={Row} controlId="contact">
                                 <Form.Label column sm="3" style={{ fontSize: 17, fontWeight: 'bold', fontFamily: 'TimesNewRoman', color: '#616161' }}>
                                 Contact No:
                                 </Form.Label>
                                 <Col sm="9">
-                                <Form.Control defaultValue={filtered_stu_data.contact}/>
+                                <Form.Control defaultValue={filtered_stu_data.contact} onChange={handleChange_1}/>
                                 </Col>
                             </Form.Group>
-                            <Form.Group as={Row} controlId="cv">
+                            <Form.Group as={Row} controlId="gpa">
                                 <Form.Label column sm="3" style={{ fontSize: 17, fontWeight: 'bold', fontFamily: 'TimesNewRoman', color: '#616161' }}>
                                 Current GPA:
                                 </Form.Label>
                                 <Col sm="9">
-                                <Form.Control  defaultValue={filtered_stu_data.current_gpa}/>
+                                <Form.Control  defaultValue={filtered_stu_data.current_gpa} onChange={handleChange_1}/>
                                 </Col>
                             </Form.Group>
                             <Button style={{float:"right"}} variant="primary" onClick={handleSubmit}>Update & Save</Button>
@@ -315,7 +296,7 @@ const handleAddStudent = evt => {
                 <div className="row">
                   <div className="col-7"></div>
                     <div className="btn_set col-5">    
-                        <button className="btn cancelbtn btn-danger clearfix float-right" style={{ width: '200px', marginRight: '2em' }}>Cancel</button>  
+                        <button className="btn cancelbtn btn-danger clearfix float-right" style={{ width: '200px', marginRight: '2em' }}onClick={()=> cancel()}>Cancel</button>  
                         <button className="btn enrollbtn btn-primary clearfix float-right"  style={{ width: '200px' }} onClick={handleShow_2}>Enroll</button>
                         
                         <Modal show={show_2} onHide={handleClose_2} size="lg">
@@ -380,14 +361,6 @@ const handleAddStudent = evt => {
                                     </Col>
                                 </Form.Group>
 
-                                {/* <Form.Group as={Row} controlId="ademail">
-                                    <Form.Label column sm="3" style={{ fontSize: 17, fontWeight: 'bold', fontFamily: 'TimesNewRoman', color: '#616161' }}>
-                                    Additional Email :
-                                    </Form.Label>
-                                    <Col sm="9">
-                                    <Form.Control type="email" placeholder="abc@gmail.com"/>
-                                    </Col>
-                                </Form.Group> */}
 
                                 <Form.Group as={Row} >
                                     <Form.Label column sm="3" style={{ fontSize: 17, fontWeight: 'bold', fontFamily: 'TimesNewRoman', color: '#616161' }}>
