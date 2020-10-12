@@ -24,7 +24,7 @@ function SideNavbar() {
                 <span className="material-icons sidebar-icon">mail</span>E mailing</div></Link>
             <Link to="/users"><div className="sidebar-link">
                 <span className="material-icons sidebar-icon">people</span>Users</div></Link>
-            <Link to="/notifications"><div className="sidebar-link">
+            <Link to="/nHome"><div className="sidebar-link">
                 <span className="material-icons sidebar-icon">notification_important</span>Notifications</div></Link>
         </div>
     )

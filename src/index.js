@@ -13,7 +13,7 @@ import Companies from './views/companies'
 import Students from './views/students'
 import StudentCvs from './views/studentCvs'
 import Emailing from './views/emailing'
-import Notifications from './views/notifications'
+//import Notifications from './views/notifications'
 import Users from './views/users'
 import Adverts from './views/adverts'
 import Login from './views/login'
@@ -27,6 +27,7 @@ import Student_csv from './content/students/student_csv';
 import Student_enrolling from './content/students/student_enrolling'
 import Student_enrolled from './content/students/student_enrolled'
 import Student_list2 from './content/students/student_list2'
+import Confirmed_students from './content/students/confirmed_students'
 
 import adHome1 from './content/advertisement/adHome1'
 import adHome2 from './content/advertisement/adHome2'
@@ -35,6 +36,9 @@ import pending from './content/advertisement/pending'
 import declined from './content/advertisement/declined'
 import category from './content/advertisement/category'
 import summary from './content/advertisement/summary'
+
+import nHome from './content/notification/nHome'
+import msg from './content/notification/msg'
 
 
 // import Companies from './content/companies/companies'
@@ -56,7 +60,9 @@ ReactDOM.render(
         <Route path="/cvs" component={StudentCvs} />
         <Route path="/emailing" component={Emailing} />
         <Route path="/users" component={Users} />
-        <Route path="/notifications" component={Notifications} />
+
+        <Route path="/nHome" component={nHome} />
+        <Route path="/msg" component={msg} />
 
         <Route path="/setDeadline" component={setDeadline} />
         <Route path="/adCategories" component={adCategories} />
@@ -80,6 +86,7 @@ ReactDOM.render(
         <Route path="/student_enrolling" component={Student_enrolling} />
         <Route path="/student_enrolled" component={Student_enrolled} />
         <Route path="/student_list2" component={Student_list2} />
+        <Route path="/confirmed_students" component={Confirmed_students} />
 
         <Redirect from="/" to="/dashboard" />
       </Switch>

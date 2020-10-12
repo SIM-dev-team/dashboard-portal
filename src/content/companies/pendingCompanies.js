@@ -78,14 +78,17 @@ export default class PendingCompany extends Component {
     }
     isApprove = (e) => {
         console.log(e);
-        // var userid = localStorage.getItem('UserToken');
-        const data = {  comp_id : e.comp_id };
-        Axios.put('http://localhost:5000/company/approveCompany', data).then(response=> this.setState({ approve: response.data.is_approved})).catch(err=>{
-            console.log(err); });
-        console.log("resu", this.state.approve );
+        const data = {  comp_id : e.comp_id, user_id: e.user_id};
+        Axios.post('http://localhost:5000/company/approveCompany', data).then(response=> console.log(response)).catch(err=>{
+            console.log(err) });
+            window.location.reload(false);
     }
     isDecline = (e) => {
-        console.log("do");
+        console.log(e);
+        const data = { comp_id : e.comp_id,  user_id: e.user_id}; 
+        Axios.post('http://localhost:5000/company/declineCompany', data).then(response=> console.log(response)).catch(err=>{
+            console.log(err); });
+            window.location.reload(false);
     }
 
     render() {
@@ -158,12 +161,11 @@ export default class PendingCompany extends Component {
                             <img className="company-logo" src={company_data.profile_pic_url} alt="com_logo"/>
                                 <div className="card-body " style={{marginLeft:' 10em'}}>
                                     <h3 className="card-title" style={{position:'relative', fontSize:'30px'}}>{company_data.comp_name}</h3>
-                                    <p className="card-title" style={{position:'relative', fontSize:'15px'}}>Contact Number :&ensp;{company_data.contact_number}</p>
-                                    <p className="card-title" style={{position:'relative', fontSize:'15px'}}>Contact register Name:&ensp;{ 'James anderson example'}</p>
-                                    <p className="card-title" style={{position:'relative', fontSize:'15px'}}>E-Mail :&ensp;{company_data.email}</p>
+                                    <p className="card-title" style={{position:'relative', fontSize:'15px'}}><b>Contact Number :</b>&ensp;{company_data.contact_number}</p>
+                                    <p className="card-title" style={{position:'relative', fontSize:'15px'}}><b>E-Mail :</b>&ensp;{company_data.email}</p>
                                     <div style={{position:'relative'}}><hr/>
                                         <button type="button" className="btn-appr" style={{backgroundColor:'#2d3436'}} value={company_data} onClick={()=>this.isApprove(company_data)}>Approve</button>&emsp;
-                                        <button type="button" className="btn-decl" style={{backgroundColor:'#2d3436'}} value={company_data} onClick={()=>this.viewClick(company_data)}>Decline</button>&emsp;&emsp;
+                                        <button type="button" className="btn-decl" style={{backgroundColor:'#2d3436'}} value={company_data} onClick={()=>this.isDecline(company_data)}>Decline</button>&emsp;&emsp;
                                         <button type="button" className="btn-viewmoreBlack" style={{backgroundColor:'#2d3436'}} value={company_data} onClick={()=>this.viewClick(company_data)}>View More...</button>
                                     </div>    
                                 </div>  
@@ -176,7 +178,7 @@ export default class PendingCompany extends Component {
                                         <Dropdown.Toggle variant="Secondary" id="dropdown-basic">
                                         </Dropdown.Toggle>
                                         <Dropdown.Menu>
-                                        <Dropdown.Item href="#/action-1">Block Company</Dropdown.Item>
+                                        <Dropdown.Item onClick={()=> this.isDecline(company_data) } href="#/action-1">Block Company</Dropdown.Item>
                                         </Dropdown.Menu>
                                     </Dropdown>
                                 </Modal.Header>
@@ -236,9 +238,8 @@ export default class PendingCompany extends Component {
                             <img className="company-logo" src={company_data.profile_pic_url} alt="com_logo"/>
                                 <div className="card-body " style={{marginLeft:' 10em'}}>
                                     <h3 className="card-title" style={{position:'relative', fontSize:'30px'}}>{company_data.comp_name}</h3>
-                                    <p className="card-title" style={{position:'relative', fontSize:'15px'}}>Contact Number :&ensp;{company_data.contact_number}</p>
-                                    <p className="card-title" style={{position:'relative', fontSize:'15px'}}>Contact register Name:&ensp;{ 'James anderson example'}</p>
-                                    <p className="card-title" style={{position:'relative', fontSize:'15px'}}>E-Mail :&ensp;{company_data.email}</p>
+                                    <p className="card-title" style={{position:'relative', fontSize:'15px'}}><b>Contact Number :</b>&ensp;{company_data.contact_number}</p>
+                                    <p className="card-title" style={{position:'relative', fontSize:'15px'}}><b>E-Mail :</b>&ensp;{company_data.email}</p>
                                     <div style={{position:'relative'}}><hr/>
                                         <button type="button" className="btn-appr" style={{backgroundColor:'#2d3436'}} value={company_data} onClick={()=>this.isApprove(company_data)}>Approve</button>&emsp;
                                         <button type="button" className="btn-decl" style={{backgroundColor:'#2d3436'}} value={company_data} onClick={()=>this.viewClick(company_data)}>Decline</button>&emsp;&emsp;

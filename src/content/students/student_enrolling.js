@@ -11,6 +11,9 @@ import {
 function Student_enrolling(){
     
     return (
+        <div>
+        <Navbar />
+        <SideBar />
         
         <div className="admin-content">
            <div className="student_enrolling">
@@ -19,6 +22,7 @@ function Student_enrolling(){
             <Link to='/student_csv' style={{width: "40%"}}><Button className="enroll" style={{padding:'15px',}}>ENROLL STUDENTS </Button></Link>
            </div>
           
+        </div>
         </div>
     )
 }

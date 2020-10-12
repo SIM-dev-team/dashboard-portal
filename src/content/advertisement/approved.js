@@ -141,13 +141,13 @@ function Approved() {
               <div class="col-md-2">
                 <Link style={{ color: 'white' }} to="/summary" > <button type="button" class="btn btn-info custom ">SUMMARY</button></Link>
               </div>
-              <div class="col-md-2">
+              <div class="col-md-3">
                 <Link style={{ color: 'white' }} to="/pending" ><button type="button" class="btn btn-info custom">PENDING APPROVAL</button></Link>
               </div>
-              <div class="col-md-2">
+              <div class="col-md-3">
                 <Link style={{ color: 'white' }} to="/approved" > <button type="button" class="btn btn-info custom" >APPROVED</button></Link>
               </div>
-              <div class="col-md-2">
+              <div class="col-md-3">
                 <Link style={{ color: 'white' }} to="/declined" ><button type="button" class="btn btn-info custom">DECLINED</button></Link>
               </div>
             </div>

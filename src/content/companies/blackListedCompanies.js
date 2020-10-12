@@ -33,7 +33,7 @@ export default class BlackListedCompany extends Component {
             .then((data) => {
                 data.sort((a, b) => a.comp_name.localeCompare(b.comp_name))
                 data.forEach( element => {
-                    if(element.is_approved === false ){
+                    if(element.is_block === true ){
                         this.state.com_names.push(element)
                     }
                 })        
@@ -69,7 +69,11 @@ export default class BlackListedCompany extends Component {
         Axios.post('http://localhost:5000/company/sendMailtoCompany', msgBody).then(response => console.log(response))
     }
     unBloclClick = (e) => {
-        console.log("do something");
+        console.log(e);
+        const data = {  comp_id : e.comp_id};
+        Axios.post('http://localhost:5000/company/unblockCompany', data).then(response=> console.log(response)).catch(err=>{
+            console.log(err) });
+            window.location.reload(false);
     }
     viewClick = (e) => {
         this.setState({ show: true,
@@ -77,7 +81,7 @@ export default class BlackListedCompany extends Component {
                 com_adrz:e.address, com_estb:e.date_of_establishment, com_intern: e.provide_internships, com_fax: e.fax_number}
         });
     }
-
+    
     render() {
         const {com_names ,alphabet, search_field} = this.state
         const filter_companie = com_names.filter(company => ((company.comp_name.toLowerCase().includes(search_field.toLowerCase())) ));
@@ -147,9 +151,8 @@ export default class BlackListedCompany extends Component {
                             <img className="company-logo" src={company_data.profile_pic_url} alt="com_logo"/>
                                 <div className="card-body " style={{marginLeft:' 10em'}}>
                                     <h3 className="card-title" style={{position:'relative', fontSize:'30px'}}>{company_data.comp_name}</h3>
-                                    <p className="card-title" style={{position:'relative', fontSize:'15px'}}>Contact Number :&ensp;{company_data.contact_number}</p>
-                                    <p className="card-title" style={{position:'relative', fontSize:'15px'}}>Contact register Name:&ensp;{ 'Mr.Subash Samarasinghe'}</p>
-                                    <p className="card-title" style={{position:'relative', fontSize:'15px'}}>E-Mail :&ensp;{company_data.email}</p>
+                                    <p className="card-title" style={{position:'relative', fontSize:'15px'}}><b>Contact Number :</b>&ensp;{company_data.contact_number}</p>
+                                    <p className="card-title" style={{position:'relative', fontSize:'15px'}}><b>E-Mail :</b>&ensp;{company_data.email}</p>
                                     <div style={{position:'relative'}}><hr/>
                                         <button type="button" className="btn-appr" style={{backgroundColor:'#2d3436'}} value={company_data} onClick={()=>this.unBloclClick(company_data)}>Unblock</button>&emsp;&emsp;
                                         <button type="button" className="btn-viewmoreBlack" style={{backgroundColor:'#2d3436'}} value={company_data} onClick={()=>this.viewClick(company_data)}>View More...</button>
@@ -225,9 +228,8 @@ export default class BlackListedCompany extends Component {
                     <img className="company-logo" src={company_data.profile_pic_url} alt="com_logo"/>
                         <div className="card-body " style={{marginLeft:' 10em'}}>
                             <h3 className="card-title" style={{position:'relative', fontSize:'30px'}}>{company_data.comp_name}</h3>
-                            <p className="card-title" style={{position:'relative', fontSize:'15px'}}>Contact Number :&ensp;{company_data.contact_number}</p>
-                            <p className="card-title" style={{position:'relative', fontSize:'15px'}}>Contact register Name:&ensp;{'Mr.Subash Samarasinghe'}</p>
-                            <p className="card-title" style={{position:'relative', fontSize:'15px'}}>E-Mail :&ensp;{company_data.email}</p>
+                            <p className="card-title" style={{position:'relative', fontSize:'15px'}}><b>Contact Number :</b>&ensp;{company_data.contact_number}</p>
+                            <p className="card-title" style={{position:'relative', fontSize:'15px'}}><b>E-Mail :</b>&ensp;{company_data.email}</p>
                             <div style={{position:'relative'}}><hr/>
                                 <button type="button" className="btn-appr" style={{backgroundColor:'#2d3436'}} value={company_data} onClick={()=>this.unBloclClick(company_data)}>Unblock</button>&emsp;&emsp;
                                 <button type="button" className="btn-viewmoreBlack" style={{backgroundColor:'#2d3436'}} value={company_data} onClick={()=>this.viewClick(company_data)}>View More...</button>
