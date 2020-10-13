@@ -19,6 +19,7 @@ function Users() {
         email: '',
         user_name: '',
         password: '',
+        role: ''
 
 
     });
@@ -54,6 +55,8 @@ function Users() {
 
     }
 
+    console.log(modalData);
+
 
 
     //function for register the user
@@ -61,7 +64,7 @@ function Users() {
         evt.preventDefault();
         setIsAdding(true);
         let userData = { newUser: modalData }
-        // console.log(userData);
+        //console.log(userData);
         try {
             axios
                 .post(`http://localhost:5000/auth/PDCUserRegister`, userData)
@@ -71,6 +74,7 @@ function Users() {
                     console.log("user added");
                     setShow(false);
                     setIsAdding(false)
+                    window.location.reload(false);
                 })
 
         } catch (error) {
@@ -127,10 +131,20 @@ function Users() {
                                     <Form.Label>Email</Form.Label>
                                     <Form.Control type="text" name="email" id="email" placeholder="Enter Email" onChange={handleChange}  >
                                     </Form.Control>
-
-                                    <Form.Label>Role</Form.Label>
-                                    <Form.Control type="text" name="role" id="role" placeholder="Role of user" onChange={handleChange}
+                                    <Form.Label>Roles</Form.Label>
+                                    <Form.Control
+                                        as="select"
+                                        className="mr-sm-2"
+                                        id="role"
+                                        name="role"
+                                        placeholder='Role of User'
+                                        custom
+                                        onChange={handleChange}
                                     >
+
+                                        <option value="adm">Administrater</option>
+                                        <option value="cod">Coordinater</option>
+                                        <option value="PA">Project Assistant</option>
                                     </Form.Control>
 
                                     <Form.Label>Username</Form.Label>
@@ -189,7 +203,7 @@ function Users() {
                 </div>
                 <div></div>
             </div>
-        </div>
+        </div >
     )
 }
 

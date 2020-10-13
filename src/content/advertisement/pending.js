@@ -99,7 +99,8 @@ function Pending() {
           console.log(res.data);
           console.log("approved");
           toast.success('Advert Approved ', { position: toast.POSITION.TOP_RIGHT });
-          history.push('/pending');
+          //history.push('/pending');
+          window.location.reload(false);
         })
         .catch(e => {
           console.log(e);
@@ -122,7 +123,8 @@ function Pending() {
           console.log(res.data);
           console.log("Declined");
           toast.error('Advert Declined  ', { position: toast.POSITION.TOP_RIGHT });
-          history.push('/pending');
+          //history.push('/pending');
+          window.location.reload(false);
 
         })
         .catch(e => {

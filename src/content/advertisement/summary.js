@@ -11,7 +11,8 @@ import { Modal, Form } from 'react-bootstrap';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-function Summary() {
+function Summary(props) {
+    console.log(props.Deadline);
     const [loading, setLoading] = useState(false);
     const [adData, setAdData] = useState([]);
     const [number, setNumber] = useState(0);
@@ -21,6 +22,8 @@ function Summary() {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const todayDate = new Date();
+
+    const [deadline, setDeadline] = useState('');
 
 
 
@@ -63,6 +66,24 @@ function Summary() {
 
     }, [loading])
     //console.log(compNumber);
+    useEffect(() => {
+        setLoading(true);
+        try {
+            axios
+                .get(`http://localhost:5000/advert/getAdvertsState`)
+                .then(res => {
+                    console.log(res.data)
+                    setDeadline(res.data.deadline);
+
+
+                })
+
+        } catch (error) {
+
+        }
+        setLoading(false)
+
+    }, [loading])
 
     const handleDateChange = (date) => {
         setSelectedDate(date)

@@ -138,7 +138,7 @@ function Approved() {
               {/* <div class="col-md-2">
                 <Link style={{ color: 'white' }} to="/adHome2" > <button type="button" class="btn btn-info custom ">HOME</button></Link>
               </div> */}
-              <div class="col-md-2">
+              <div class="col-md-3">
                 <Link style={{ color: 'white' }} to="/summary" > <button type="button" class="btn btn-info custom ">SUMMARY</button></Link>
               </div>
               <div class="col-md-3">

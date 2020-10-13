@@ -8,14 +8,16 @@ import axios from 'axios'
 function Adverts() {
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState(false);
+
   useEffect(() => {
     setLoading(true);
     try {
       axios
-        .get(`http://localhost:5000/advert//getAdvertsState`)
+        .get(`http://localhost:5000/advert/getAdvertsState`)
         .then(res => {
           console.log(res.data)
           setStatus(res.data.val);
+
         })
 
     } catch (error) {
@@ -30,7 +32,7 @@ function Adverts() {
     <div>
       <Navbar />
       <SideBar />
-      {!status ? <Content /> : <Content1 />}
+      {status ? <Content /> : <Content1 />}
 
     </div>
   )
