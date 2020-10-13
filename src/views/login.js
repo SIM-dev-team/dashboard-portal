@@ -57,7 +57,7 @@ function Login() {
                 else {
                     auth.setAuthenticatedTrue(res.data);
                     console.log("res data :" + res.data);
-                    history.push('/');
+                    history.push('/registeredcom');
                 }
 
             })
